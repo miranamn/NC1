@@ -7,6 +7,8 @@ public class MusicTrack extends Entity implements Serializable {
     private String nameOfAlbum;
     private MusicGenres genreOfTrack;
 
+    public MusicTrack(){}
+
     public MusicTrack(int id, String name, String nameOfPerformer, String nameOfAlbum, MusicGenres genreOfTrack) {
         super(id, name);
         this.nameOfPerformer = nameOfPerformer;

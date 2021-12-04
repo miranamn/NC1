@@ -1,4 +1,4 @@
-package view;
+/*package view;
 
-public class JavaDocView implements View {
-}
+public class JavaDocView {
+}*/

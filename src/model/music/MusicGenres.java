@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class MusicGenres extends Entity implements Serializable {
 
+    public MusicGenres(){}
+
     public MusicGenres(int id, String name){
         super(id, name);
     }

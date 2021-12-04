@@ -1,19 +1,31 @@
 package model;
 
+import model.music.Entity;
 import model.music.MusicTrack;
+import view.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TrackListLoader implements Loader, Serializable {
     private ArrayList<MusicTrack> list;
+    private View view;
+
+    public TrackListLoader(View view) {
+        this.view = view;
+        list = new ArrayList<MusicTrack>();
+    }
+
+    public TrackListLoader(){
+        list = new ArrayList<MusicTrack>();
+    }
 
     public TrackListLoader(ArrayList<MusicTrack> list) {
         this.list = list;
     }
 
-    public void addEntity(int n, Object o){
-        list.add(n, (MusicTrack) o);
+    public void addEntity(Entity o){
+        list.add((MusicTrack) o);
     }
 
     public void delEntity(int n){
@@ -34,6 +46,10 @@ public class TrackListLoader implements Loader, Serializable {
 
     public void setList(ArrayList<MusicTrack> list) {
         this.list = list;
+    }
+
+    public int getSize(){
+        return list.size();
     }
 
     //реализация toString() для списка

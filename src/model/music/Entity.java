@@ -1,8 +1,12 @@
 package model.music;
 
-public class Entity {
+import java.io.Serializable;
+
+public class Entity implements Serializable {
     private int id;
     private String name;
+
+    public Entity(){}
 
     public Entity(int id, String name) {
         this.id = id;
