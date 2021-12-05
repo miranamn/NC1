@@ -39,7 +39,7 @@ public class Controller implements Serializable {
 
     public void ListInstall() throws IOException, ClassNotFoundException {
         FileInputStream in = new FileInputStream("tracks.txt");
-        Streams.deserializeList(in); //рота подъем!!!!
+        list = Streams.deserializeList(in); //десериализация листа из файла
     }
 
 }

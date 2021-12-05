@@ -17,8 +17,17 @@ public class ConsoleView implements View, Serializable {
     }
 
     public void init() throws IOException, ParseException, ClassNotFoundException {
-        System.out.println("Program is running");
+        System.out.println("Program is running. Do you want to continue working or start a new list? ");
         Scanner sc = new Scanner(System.in);
+        String choice = sc.nextLine();
+        switch (choice){
+            case "continue":
+                controller.ListInstall();
+                System.out.println("Data uploaded. Select the command");
+                break;
+            default:
+                System.out.println("start new list");
+        }
         String buff = sc.nextLine(); //ожидание ввода команды
         String[] str = buff.split(" ");
         switch (str[0]){
@@ -35,7 +44,6 @@ public class ConsoleView implements View, Serializable {
         String answer = sc.nextLine();
         switch (answer){
             case "yes":
-                controller.ListInstall(); //десериализация листа из файла
                 init();
             case "no" :
                 break;
