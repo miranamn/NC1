@@ -13,7 +13,7 @@ public class TrackListLoader implements Loader, Serializable {
 
     public TrackListLoader(View view) {
         this.view = view;
-        list = new ArrayList<MusicTrack>();
+        list = new ArrayList<>();
     }
 
     public TrackListLoader(){
@@ -26,6 +26,30 @@ public class TrackListLoader implements Loader, Serializable {
 
     public void addEntity(Entity o){
         list.add((MusicTrack) o);
+    }
+
+    public int[] searchEntity(String[] str) {
+        String nameOfPerformer = str[0];
+        String nameOfSong = str[1];
+        int count = 0;
+        int[] arr = new int[count];
+        for(MusicTrack i: list){
+            if(nameOfPerformer == i.getNameOfPerformer() && nameOfSong == i.getNameOfTrack()){
+                arr[count] = i.getIdOfTrack();
+                count++;
+            }
+        }
+        if(count == 0) {
+            System.out.println("No matches, sorry");
+            return null;
+        }
+        else return arr;
+    }
+
+    public void setEntityList(ArrayList<Entity> arr) {
+        for(int i = 0; i < arr.size(); i++){
+            list.add(i, (MusicTrack) arr.get(i));
+        }
     }
 
     public void delEntity(int n){

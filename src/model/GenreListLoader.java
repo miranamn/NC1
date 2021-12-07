@@ -29,6 +29,30 @@ public class GenreListLoader implements Loader, Serializable {
         list.add((MusicGenres) o);
     }
 
+    public void setEntityList(ArrayList<Entity> arr){
+        list = new ArrayList<>();
+        for(int i = 0; i < arr.size(); i++){
+            list.add(i, (MusicGenres) arr.get(i));
+        }
+    }
+
+    public int[] searchEntity(String[] str) {
+        String name = str[0];
+        int count = 0;
+        int[] arr = new int[count];
+        for(MusicGenres i: list){
+            if(name == i.getName()){
+                arr[count] = i.getId();
+                count++;
+            }
+        }
+        if(count == 0) {
+            System.out.println("No matches, sorry");
+            return null;
+        }
+        else return arr;
+    }
+
     public void delEntity(int n){
         list.remove(n);
     }

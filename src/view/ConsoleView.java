@@ -32,10 +32,11 @@ public class ConsoleView implements View, Serializable {
         String[] str = buff.split(" ");
         switch (str[0]){
             case "add":
-                controller.addEntity(JsonHelper.AddEntityMakeJson(str));
+                controller.addEntity(JsonHelper.addTrackArrayJson(str));
                 break;
             case "search":
-                //вызов метода поиска
+                System.out.println("Name of performer/ name of song OR name of genre");
+                //controller.searchEntity(JsonHelper.addTrackArrayJson());
                 break;
             default:
                 System.out.println("Where is an action?");

@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import view.util.JsonHelper;
 import view.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Controller implements Serializable {
     private Loader list;
@@ -29,17 +30,25 @@ public class Controller implements Serializable {
     }
 
     public void addEntity(JSONObject js) throws IOException, ParseException {
-        Entity temp = JsonHelper.getEntityFromJson(js);
-        list.addEntity(temp);
+        ArrayList<Entity> temp = JsonHelper.getArrayFromJson(js);
+        list.setEntityList(temp);
         FileOutputStream os = new FileOutputStream("tracks.txt");
-        Streams.serializeList(list, os); //сериализация
-        System.out.println(list.toString()); //если вон та строчка выполнена норм, то списочек на экран выведется
+        Streams.serializeList(list, os);
+        System.out.println(list.toString());
 
+    }
+    public void searchEntity(JSONObject js, String[] str) throws IOException, ParseException {
+        ArrayList<Entity> arr = JsonHelper.getArrayFromJson(js);
+        list.setEntityList(arr);
+        list.searchEntity(str);
+        FileOutputStream os = new FileOutputStream("tracks.txt");
+        Streams.serializeList(list, os);
+        System.out.println(list.toString());
     }
 
     public void ListInstall() throws IOException, ClassNotFoundException {
         FileInputStream in = new FileInputStream("tracks.txt");
-        list = Streams.deserializeList(in); //десериализация листа из файла
+        list = Streams.deserializeList(in);
     }
 
 }
