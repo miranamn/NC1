@@ -13,6 +13,7 @@ public class Main {
         View view = new ConsoleView(controller);
         Loader list = new TrackListLoader(view);
         controller.setList(list);
+        
         view.init();
     }
 }
