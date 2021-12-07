@@ -34,9 +34,9 @@ public class Controller implements Serializable {
         list.setEntityList(temp);
         FileOutputStream os = new FileOutputStream("tracks.txt");
         Streams.serializeList(list, os);
-        System.out.println(list.toString());
 
     }
+
     public void searchEntity(JSONObject js, String[] str) throws IOException, ParseException {
         ArrayList<Entity> arr = JsonHelper.getArrayFromJson(js);
         list.setEntityList(arr);
@@ -49,6 +49,10 @@ public class Controller implements Serializable {
     public void ListInstall() throws IOException, ClassNotFoundException {
         FileInputStream in = new FileInputStream("tracks.txt");
         list = Streams.deserializeList(in);
+    }
+
+    public String giveMe(){
+        return list.toString();
     }
 
 }

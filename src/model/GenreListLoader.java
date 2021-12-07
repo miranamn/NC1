@@ -30,7 +30,6 @@ public class GenreListLoader implements Loader, Serializable {
     }
 
     public void setEntityList(ArrayList<Entity> arr){
-        list = new ArrayList<>();
         for(int i = 0; i < arr.size(); i++){
             list.add(i, (MusicGenres) arr.get(i));
         }

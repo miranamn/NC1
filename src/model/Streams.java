@@ -65,7 +65,7 @@ public abstract class Streams{
     }
     public static Loader deserializeList (InputStream in) throws IOException, ClassNotFoundException{
         ObjectInputStream is = new ObjectInputStream(in);
-        Loader list = (TrackListLoader) is.readObject();
+        Loader list = (Loader) is.readObject();
         return list;
     }
 }

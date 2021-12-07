@@ -2,7 +2,9 @@ package model;
 
 import model.music.Entity;
 import model.music.MusicTrack;
+import org.json.simple.JSONObject;
 import view.View;
+import view.util.JsonHelper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -75,6 +77,11 @@ public class TrackListLoader implements Loader, Serializable {
     public int getSize(){
         return list.size();
     }
+
+   /* public void resultList(){
+        JSONObject obj = JsonHelper.addTrackArrayJson(this.list);
+        view.
+    }*/
 
     //реализация toString() для списка
     @Override
