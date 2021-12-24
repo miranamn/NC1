@@ -120,7 +120,7 @@ public class FileLoader implements Loader, Serializable {
     }
 
     //поиск для изменения
-    public int searchTrackForSet(String author, String name, ArrayList<MusicTrack> list) throws IOException, ClassNotFoundException, ParseException {
+    public int searchTrackForSet(String author, String name, ArrayList<MusicTrack> list){
         int index = 0;
         for (Entity i : list) {
             if (name.equals(((MusicTrack) i).getNameOfTrack()) && author.equals(((MusicTrack) i).getNameOfPerformer())) {
