@@ -3,6 +3,7 @@ package model;
 import model.music.Entity;
 import model.music.MusicTrack;
 import model.music.MusicGenres;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import view.View;
 import util.JsonHelper;
@@ -31,18 +32,51 @@ public class FileLoader implements Loader, Serializable {
     }
 
     //добавление сущностей в список
-    public void addTracks(ArrayList<MusicTrack> arr) throws IOException, ClassNotFoundException, ParseException {
+    public void addTracks(JSONObject js) throws IOException, ClassNotFoundException, ParseException {
         ArrayList<MusicTrack> list = Streams.deserializeList(TRACK_FILE);
+        ArrayList arr = JsonHelper.getArrayFromJson(js);
         add(arr, list);
         Streams.serializeList(list, TRACK_FILE);
         resultTrackList(list);
     }
 
-    public void addGenres(ArrayList<MusicGenres> arr) throws IOException, ClassNotFoundException, ParseException {
+    public void addGenres(JSONObject js) throws IOException, ClassNotFoundException, ParseException {
         ArrayList<MusicGenres> list = Streams.deserializeList(GENRE_FILE);
+        ArrayList arr = JsonHelper.getArrayFromJson(js);
         add(arr, list);
         Streams.serializeList(list, GENRE_FILE);
         resultGenresList(list);
+    }
+
+    public void searchEntityTemp(JSONObject js) throws IOException, ParseException, ClassNotFoundException {
+        ArrayList<String> keys = JsonHelper.parseJsonToSearchArr(js);
+        String name, author, album, genre = " ";
+        if (js.containsValue(TRACK)) {
+            if (!keys.get(0).contains("*") && !keys.get(1).contains("*")){
+                name = keys.get(0);
+                author = keys.get(1);
+                searchTrackByNameAndPerformer(name, author);
+            }
+            else if (!keys.get(0).contains("*")) {
+                name = keys.get(0);
+                searchTrackName(name);
+            }
+            else if (!keys.get(1).contains("*")) {
+                author = keys.get(1);
+                searchTrackAuthor(author);
+            }
+            else if (!keys.get(2).contains("*")) {
+                album = keys.get(2);
+                searchTrackAlbum(album);
+            }
+            else if (!keys.get(3).contains("*")) {
+                genre = keys.get(3);
+                searchTrackByGenre(genre);
+            }
+        }else {
+            genre = keys.get(0);
+            searchGenre(genre);
+        }
     }
 
     //метод для поиска трека по имени
@@ -159,20 +193,47 @@ public class FileLoader implements Loader, Serializable {
         return null;
     }
 
-    public void delGenre(String name) throws IOException, ClassNotFoundException, ParseException {
+    public void delGenre(JSONObject js) throws IOException, ClassNotFoundException, ParseException {
         ArrayList<MusicGenres> arrGenres = Streams.deserializeList(GENRE_FILE);
+        ArrayList<String> str = JsonHelper.parseJsonToDeleteArr(js);
+        String name = str.get(0);
         MusicGenres buff = searchGenreForDelete(name, arrGenres);
         arrGenres.remove(buff);
         Streams.serializeList(arrGenres, GENRE_FILE);
         resultGenresList(arrGenres);
     }
 
-    public void delTrack(String author, String track) throws IOException, ClassNotFoundException, ParseException {
+    public void delTrack(JSONObject js) throws IOException, ClassNotFoundException, ParseException {
         ArrayList<MusicTrack> arrTrack = Streams.deserializeList(TRACK_FILE);
+        ArrayList<String> str = JsonHelper.parseJsonToDeleteArr(js);
+        String track = str.get(0);
+        String author = str.get(1);
         MusicTrack buff = searchTrackForDelete(author, track, arrTrack);
         arrTrack.remove(buff);
         Streams.serializeList(arrTrack, TRACK_FILE);
         resultTrackList(arrTrack);
+    }
+
+    public void setEntityTemp(JSONObject js) throws IOException, ClassNotFoundException, ParseException {
+        ArrayList<String> arr = JsonHelper.parseJsonToSetArr(js);
+        String nameSearch = arr.get(0);
+        if (js.containsValue(TRACK)) {
+            int i = 1;
+            MusicTrack o = new MusicTrack();
+            String authorSearch = arr.get(i++);
+            String name = arr.get(i++);
+            String author = arr.get(i++);
+            String album = arr.get(i++);
+            String genre = arr.get(i);
+            if (o.createTrack(genre)) {
+                o = new MusicTrack(name, author, album, genre);
+                setTrack(authorSearch, nameSearch, o);
+            }
+        } else {
+            String genre = arr.get(1);
+            MusicGenres o = new MusicGenres(genre);
+            setGenre(nameSearch, o);
+        }
     }
 
     //сеттер трека в списке

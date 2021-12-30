@@ -1,12 +1,14 @@
 package model;
 
 import model.music.*;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public interface Loader {
+    public void searchEntityTemp(JSONObject js) throws IOException, ParseException, ClassNotFoundException;
 
     public void searchTrackName(String name) throws IOException, ClassNotFoundException, ParseException;
 
@@ -20,15 +22,17 @@ public interface Loader {
 
     public void searchGenre(String genre) throws IOException, ParseException, ClassNotFoundException;
 
-    public void delTrack(String perf, String track) throws IOException, ClassNotFoundException, ParseException;
+    public void delTrack(JSONObject js) throws IOException, ClassNotFoundException, ParseException;
 
-    public void delGenre(String name) throws IOException, ClassNotFoundException, ParseException;
+    public void delGenre(JSONObject js) throws IOException, ClassNotFoundException, ParseException;
 
     //метод добавления треков в список
-    public void addTracks(ArrayList<MusicTrack> arr) throws IOException, ClassNotFoundException, ParseException;
+    public void addTracks(JSONObject js) throws IOException, ClassNotFoundException, ParseException;
 
     //метод добавления жанров в список
-    public void addGenres(ArrayList<MusicGenres> arr) throws IOException, ClassNotFoundException, ParseException;
+    public void addGenres(JSONObject js) throws IOException, ClassNotFoundException, ParseException;
+
+    public void setEntityTemp(JSONObject js) throws IOException, ClassNotFoundException, ParseException;
 
     //метод изменения трека
     public void setTrack(String author, String name, MusicTrack o) throws IOException, ClassNotFoundException, ParseException;
