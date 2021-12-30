@@ -18,5 +18,5 @@ public final class Values {
     public static final String NAME_FOR_SEARCH = "nameOfTrackSearch";
     public static final String PERFORMER_FOR_SEARCH = "nameOfPerformerSearch";
     public static final String GENRE_FOR_SEARCH = "nameOfGenreSearch";
-    public static final String INVALID_GENRE = "The genre was not found in the file";
+    public static final String INVALID_ENTITY = "Entity was not found in the file";
 }

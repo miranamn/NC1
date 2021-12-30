@@ -149,7 +149,6 @@ public abstract class JsonHelper {
             obj.put(NAME_OF_ALBUM, str[i++]);
             obj.put(NAME_OF_GENRE, str[i]);
         } else {
-            obj = new JSONObject();
             obj.put(GENRE_FOR_SEARCH, str[i++]);
             obj.put(NAME_OF_GENRE, str[i]);
         }
@@ -202,7 +201,7 @@ public abstract class JsonHelper {
 
     public static JSONObject errorJson(){
         JSONObject obj = new JSONObject();
-        obj.put(COMMAND, INVALID_GENRE);
+        obj.put(COMMAND, INVALID_ENTITY);
         return obj;
     }
 
