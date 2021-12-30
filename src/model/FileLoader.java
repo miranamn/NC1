@@ -242,7 +242,7 @@ public class FileLoader implements Loader, Serializable {
         int index = searchTrackForSet(author, name, list);
         if(index == -1){
             //throw new Exceptions.ListIndexOutOfBoundException("Error, track was not found");
-            view.stringList(JsonHelper.errorJson());
+            view.errorList(JsonHelper.errorJson());
         }
         else {
             list.set(index, o);
@@ -257,7 +257,7 @@ public class FileLoader implements Loader, Serializable {
         int index = searchGenreForOperations(name, list);
         if(index == -1){
             //throw new Exceptions.ListIndexOutOfBoundException("Error, genre was not found");
-            view.stringList(JsonHelper.errorJson());
+            view.errorList(JsonHelper.errorJson());
         }
         else{
             list.set(index, o);

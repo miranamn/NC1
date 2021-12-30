@@ -12,4 +12,6 @@ public interface View {
 
     public void stringList(JSONObject object) throws IOException, ParseException;
 
+    public void errorList(JSONObject object);
+
 }

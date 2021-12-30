@@ -205,4 +205,9 @@ public abstract class JsonHelper {
         return obj;
     }
 
+    public static String parseErrorJson(JSONObject obj){
+       String str = (String) obj.get(COMMAND);
+       return str;
+    }
+
 }

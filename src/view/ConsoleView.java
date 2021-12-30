@@ -64,4 +64,8 @@ public class ConsoleView implements View, Serializable {
     public void stringList(JSONObject object) throws IOException, ParseException {
         System.out.println("Results:\n " + JsonHelper.viewModel(object).toString());
     }
+
+    public void errorList(JSONObject object) {
+        System.out.println("Result:\n " + JsonHelper.parseErrorJson(object));
+    }
 }
