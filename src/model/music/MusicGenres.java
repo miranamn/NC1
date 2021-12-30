@@ -1,7 +1,14 @@
 package model.music;
 
+import model.InvalidGenreException;
+import model.Streams;
+
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
+
+import static model.Values.GENRE_FILE;
 
 public class MusicGenres extends Entity implements Serializable {
 

@@ -86,13 +86,16 @@ public class Controller implements Serializable {
         String nameSearch = arr.get(0);
         if (js.containsValue(TRACK)) {
             int i = 1;
+            MusicTrack o = new MusicTrack();
             String authorSearch = arr.get(i++);
             String name = arr.get(i++);
             String author = arr.get(i++);
             String album = arr.get(i++);
             String genre = arr.get(i);
-            MusicTrack o = new MusicTrack(name, author, album, genre);
-            loader.setTrack(authorSearch, nameSearch, o);
+            if (o.createTrack(genre)) {
+                o = new MusicTrack(name, author, album, genre);
+                loader.setTrack(authorSearch, nameSearch, o);
+            }
         } else {
             String genre = arr.get(1);
             MusicGenres o = new MusicGenres(genre);

@@ -43,7 +43,7 @@ public abstract class JsonHelper {
         String command = (String) obj.get(COMMAND);
         String entity = (String) obj.get(ENTITY);
         MusicGenres genre;
-        MusicTrack track;
+        MusicTrack track = new MusicTrack();
         String sub = GENRE;
         JSONArray jsArr;
         JSONObject buff;
@@ -64,8 +64,10 @@ public abstract class JsonHelper {
             String nameOfPerformer = (String) buff.get(NAME_OF_PERFORMER);
             String nameOfAlbum = (String) buff.get(NAME_OF_ALBUM);
             String nameOfGenre = (String) buff.get(NAME_OF_GENRE);
-            track = new MusicTrack(nameOfTrack, nameOfPerformer, nameOfAlbum, nameOfGenre);
-            arr.add(track);
+            if (track.createTrack(nameOfGenre)) {
+                track = new MusicTrack(nameOfTrack, nameOfPerformer, nameOfAlbum, nameOfGenre);
+                arr.add(track);
+            }
         }
         return arr;
     }
@@ -197,4 +199,11 @@ public abstract class JsonHelper {
         }
         return arr;
     }
+
+    public static JSONObject errorJson(){
+        JSONObject obj = new JSONObject();
+        obj.put(COMMAND, INVALID_GENRE);
+        return obj;
+    }
+
 }

@@ -15,10 +15,6 @@ import java.util.ArrayList;
 public class FileLoader implements Loader, Serializable {
     private View view;
 
-    public FileLoader() {
-        ArrayList<Entity> arr = new ArrayList<>();
-    }
-
     public FileLoader(View view) {
         this.view = view;
     }
@@ -101,7 +97,7 @@ public class FileLoader implements Loader, Serializable {
         ArrayList<MusicTrack> list = Streams.deserializeList(TRACK_FILE);
         ArrayList<MusicTrack> arr = new ArrayList<>();
         for (Entity i : list) {
-            if (name.equals(((MusicTrack) i).getNameOfGenre()))
+            if (name.equals(((MusicTrack) i).nameOfGenreById()))
                 arr.add((MusicTrack) i);
         }
         if (arr.size() == 0) return;
@@ -131,18 +127,17 @@ public class FileLoader implements Loader, Serializable {
         return -1;
     }
     //поиск для удаления
-    public MusicTrack searchTrackForDelete(String author, String name, ArrayList<MusicTrack> list) throws IOException, ClassNotFoundException, ParseException {
+    public MusicTrack searchTrackForDelete(String author, String name, ArrayList<MusicTrack> list) {
         for (Entity i : list) {
             if (name.equals(((MusicTrack) i).getNameOfTrack()) && author.equals(((MusicTrack) i).getNameOfPerformer())) {
-                MusicTrack track = (MusicTrack) i;
-                return track;
+                return (MusicTrack) i;
             }
         }
         return null;
     }
 
     //поиск для изменения
-    public int searchGenreForOperations(String name, ArrayList<MusicGenres> list) throws IOException, ClassNotFoundException, ParseException {
+    public int searchGenreForOperations(String name, ArrayList<MusicGenres> list){
         int index = 0;
         for (Entity i : list) {
             if (name.equals(i.getName())) {
@@ -154,7 +149,7 @@ public class FileLoader implements Loader, Serializable {
     }
 
     //поиск для удаления
-    public MusicGenres searchGenreForDelete(String name, ArrayList<MusicGenres> list) throws IOException, ClassNotFoundException, ParseException {
+    public MusicGenres searchGenreForDelete(String name, ArrayList<MusicGenres> list) {
         for (Entity i : list) {
             if (name.equals(i.getName())) {
                 MusicGenres genre = (MusicGenres) i;
