@@ -9,11 +9,11 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException, ParseException, ClassNotFoundException {
-        Controller controller = new Controller();
+        /*Controller controller = new Controller();
         View view = new ConsoleView(controller);
         Loader loader = new FileLoader(view);
         controller.setLoader(loader);
-        view.init();
+        view.init();*/
     }
 }
 

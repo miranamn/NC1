@@ -12,21 +12,26 @@ import java.io.*;
 import static model.Values.*;
 
 public class Controller implements Serializable {
-    private Loader loader;
+    //private Loader loader;
     private View view;
+    private ObjectOutputStream out = null;
 
     public Controller() {
     }
 
-    public void setLoader(Loader loader1) {
+    /*public void setLoader(Loader loader1) {
         this.loader = loader1;
+    }*/
+
+    public void setOut(ObjectOutputStream out) {
+        this.out = out;
     }
 
-    public Loader getList() {
-        return loader;
+    public void operationForEntity(JSONObject js) throws IOException {
+        out.writeObject(js);
     }
 
-    public void addEntity(JSONObject js) throws IOException, ParseException, ClassNotFoundException {
+    /*public void addEntity(JSONObject js) throws IOException, ParseException, ClassNotFoundException {
         if (js.containsValue(TRACK)) loader.addTracks(js);
         else loader.addGenres(js);
     }
@@ -49,7 +54,6 @@ public class Controller implements Serializable {
 
     public void setEntity(JSONObject js) throws IOException, ClassNotFoundException, ParseException {
         loader.setEntityTemp(js);
-    }
-
+    }*/
 }
 
